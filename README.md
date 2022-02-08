@@ -1,8 +1,16 @@
-#  贝尔 Python-tornado-vue 低代码开发平台
+#  贝尔 bauer-admin-vue 低代码开发平台
 
 #### 后端项目：
 
+​	GitHup：https://github.com/shiming-git/bauer-admin-python
+
+​	Gitee：https://gitee.com/librarycodes/bauer-admin-python
+
 #### 前端项目：
+
+​	GitHup：https://github.com/shiming-git/bauer-admin-vue
+
+​	Gitee：https://gitee.com/librarycodes/bauer-admin-vue
 
 
 
