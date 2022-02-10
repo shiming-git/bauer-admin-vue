@@ -46,8 +46,13 @@ const getters = {
         return state.cacheNavigation;
     },
     // 表字段
-    getCacheTableFiled:state=>{
+    getCacheTableFiled: state => {
         return state.cacheTableFiled
+    },
+    // 获取数据字典
+    getCacheDictCode: (state) => (key) => {
+        let item = state.cacheDictCode[key]
+        return Object.assign([], item)
     }
 }
 export default getters;

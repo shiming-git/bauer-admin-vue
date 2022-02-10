@@ -42,6 +42,7 @@
 <script>
 import { pageMiXin } from "@/mixins/pageMiXin";
 import readTableModel from "./model/OnlDictModel";
+import { cacheDataDict } from "@/http/cacheApi";
 
 export default {
   name: "OnlOnlDictList",
@@ -62,7 +63,9 @@ export default {
       },
     };
   },
-  created() {},
+  created() {
+    cacheDataDict("A")
+  },
   methods: {
 
   },

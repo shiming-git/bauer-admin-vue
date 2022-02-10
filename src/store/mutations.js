@@ -94,7 +94,15 @@ const mutations = {
     setCacheTableFiled(state, item) {
         let row = JSON.parse(JSON.stringify(item));
         state.cacheTableFiled = row
+    },
+    // 存储数据字典
+    // key  value
+    setCacheDictCode(state, item) {
+        let key = item["key"]
+        let value = item["value"]
+        state.cacheDictCode[key] = value
     }
+
 }
 
 export default mutations;

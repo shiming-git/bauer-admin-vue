@@ -48,6 +48,8 @@ const state = {
     //菜单列表缓存
     cacheNavigation: {},
     // 表字段名保存
-    cacheTableFiled:{},
+    cacheTableFiled: {},
+    // 保存数据字典
+    cacheDictCode: {},
 }
 export default state;

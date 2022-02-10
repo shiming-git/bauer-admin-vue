@@ -40,22 +40,69 @@ export function cacheNavigation(isClear = false) {
  * @param {*} table_name 
  * @returns 
  */
-export function cacheTableFilde(table_name){
-    return new Promise((resolve, reject)=>{
+export function cacheTableFilde(table_name) {
+    return new Promise((resolve, reject) => {
         let item = store.getters.getCacheTableFiled
         if (item && item[table_name]) {
             resolve(item[table_name])
-        }else{
-            api.getOnlTableFaild({"table_name":table_name}).then(res=>{
+        } else {
+            api.getOnlTableFaild({ "table_name": table_name }).then(res => {
                 if (res.code != "00000") {
                     reject([]);
-                }else{
-                    if(!item){
+                } else {
+                    if (!item) {
                         item = {}
                     }
                     item[table_name] = res.data;
                     store.commit('setCacheTableFiled', item)
                     resolve(item[table_name])
+                }
+            }).catch(() => {
+                reject([]);
+            });
+        }
+    })
+}
+
+
+/**
+ * 数据字典缓存
+ * @param {*} code 
+ * @param {*} table 
+ * @param {*} value 
+ * @param {*} where 
+ * @returns 
+ */
+export function cacheDataDict(code, table = null, value = null, where = null) {
+    return new Promise((resolve, reject) => {
+        let data = {
+            code,
+            table,
+            value,
+            where
+        }
+        let keys = []
+        code && keys.push(code)
+        table && keys.push(table)
+        value && keys.push(value)
+        where && keys.push(where)
+
+        let str_key = keys.join("-")
+        let v = store.getters.getCacheDictCode(str_key)
+        if (v.length > 0) {
+            resolve(v)
+        } else {
+            api.getDictCode(data).then(res => {
+                if (res.code != "00000") {
+                    reject([]);
+                } else {
+                    let list = res.data
+                    let item = {
+                        "key": keys,
+                        "value": list
+                    }
+                    store.commit('setCacheDictCode', item)
+                    resolve(list)
                 }
             }).catch(() => {
                 reject([]);

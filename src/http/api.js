@@ -32,10 +32,15 @@ export default {
         return http.get("/onl/onl_table/all", data)
     },
     // 获取表字段名
-    getOnlTableFaild(data ={}){
-        return http.get("/onl/onl_field_name",data)
+    getOnlTableFaild(data = {}) {
+        return http.get("/onl/onl_field_name", data)
+    },
+    // 获取数据字典 
+    getDictCode(data = {}) {
+        return http.get("/onl/onl_dict_code", data)
     },
 
+    
 
 
     //添加好友分组
