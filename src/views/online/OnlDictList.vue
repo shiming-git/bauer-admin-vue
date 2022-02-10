@@ -64,7 +64,7 @@ export default {
     };
   },
   created() {
-    cacheDataDict("A")
+    cacheDataDict("onl_table_type")
   },
   methods: {
 
