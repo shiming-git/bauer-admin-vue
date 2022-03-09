@@ -9,6 +9,10 @@ export const pageMiXin = {
             isPublicMethod: true,
             loading: false,
             headers: { "Content-Type": "application/json; charset=utf-8" },
+            // 自定义字段属性
+            defineAttributes: {},
+            // 额外表格
+            tableList: [],
             // 表格字段
             tableColumn: [],
             // 表格数据
@@ -32,8 +36,8 @@ export const pageMiXin = {
             },
             /* 排序参数 */
             isorter: {
-                column: '',
-                order: 'desc',
+                column: 'id',
+                order: 'DESC',
             },
             // 配置参数
             config: {}
@@ -86,7 +90,14 @@ export const pageMiXin = {
         },
         handleTableFieldColumn(res) {
             let table_column = [];
+
+            let list = this.tableList
+            list.forEach(item => {
+                table_column.push(item)
+            })
+
             res.forEach(item => {
+                console.log(item["field_describe"], "==>>", item["field_name"], "\t", item["field_type"])
                 let obj = {}
                 obj["label"] = item["field_describe"]
                 obj["prop"] = item["field_name"]
@@ -100,7 +111,7 @@ export const pageMiXin = {
             if (this.config.setting_button) {
                 let obj = {
                     label: "操作",
-                    prop: "",
+                    prop: "oper_button",
                     sortable: true,
                     slotVlue: "modify",
                     width: "120",
@@ -108,6 +119,17 @@ export const pageMiXin = {
                 }
                 table_column.push(obj)
             }
+            for (let i in table_column) {
+                let item = table_column[i]
+                let key = item.prop
+                let obj = this.defineAttributes[key]
+                if (!obj) {
+                    continue
+                }
+                item["column"] = obj["column"] || null
+                item["width"] = obj["width"] || null
+            }
+
             this.tableColumn = table_column
         },
 

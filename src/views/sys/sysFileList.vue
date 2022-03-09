@@ -32,13 +32,20 @@
       v-model="multipleSelection"
       @onpage="handlePage"
     >
+      <template v-slot:imgSlot="{ txt, row, index }">
+        <el-image
+          style="width: 40px; height: 40px"
+          fit="contain"
+          :src="'/api/sys/file/dowload/' + row['file_name']"
+        >
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
+      </template>
       <template v-slot:modify="{ txt, row, index }">
         <el-button type="text" size="small" @click="editHandle(row)"
           >编辑</el-button
-        >
-        <el-divider direction="vertical"></el-divider>
-        <el-button type="text" size="small" @click="editDrawer(row)"
-          >修改字典</el-button
         >
         <el-divider direction="vertical"></el-divider>
         <el-dropdown size="small">
@@ -56,47 +63,49 @@
     </x-table>
 
     <readTableModel ref="model" @ok="submitForm"></readTableModel>
-    <OnlDictDrawer ref="drawer"></OnlDictDrawer>
   </div>
 </template>
 <script>
 import { pageMiXin } from "@/mixins/pageMiXin";
-import readTableModel from "./model/OnlDictModel";
-import OnlDictDrawer from "./model/OnlDictDrawer";
-import { cacheDataDict } from "@/http/cacheApi";
+import readTableModel from "./model/FileSysFileModel";
 
 export default {
-  name: "OnlOnlDictList",
+  name: "FileSysFileList",
   mixins: [pageMiXin],
-  components: { readTableModel, OnlDictDrawer },
+  components: { readTableModel },
   data() {
     return {
-      table_describe: "数据字典",
-      table_name: "onl_dict",
+      table_describe: "文件管理",
+      table_name: "sys_file",
       config: {
         setting_button: true,
       },
       defineAttributes: {
-        oper_button: {
-          width: "180px",
+        file_size: {
+          column: (item, row) => {
+            return item["file_size"] + "KB";
+          },
         },
       },
+      tableList: [
+        {
+          label: "图片",
+          prop: "img",
+          sortable: true,
+          width: "120",
+          slotVlue: "imgSlot",
+        },
+      ],
 
       url: {
-        list: "/onl/onl_dict",
-        edit: "/onl/onl_dict",
-        delete: "/onl/onl_dict",
+        list: "/sys/file/sys_file",
+        edit: "/sys/file/sys_file",
+        delete: "/sys/file/sys_file",
       },
     };
   },
-  created() {
-    cacheDataDict("onl_table_type");
-  },
-  methods: {
-    editDrawer(row) {
-      this.$refs.drawer.edit(row);
-    },
-  },
+  created() {},
+  methods: {},
 };
 </script>
 <style lang="less" scoped>

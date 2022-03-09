@@ -37,14 +37,9 @@
           >
             批量移除
           </el-button>
-          <el-button
-            type="danger"
-            size="small"
-            icon="el-icon-delete"
-          >
+          <el-button type="danger" size="small" icon="el-icon-delete">
             批量删除
           </el-button>
-
         </template>
       </el-row>
     </div>
@@ -121,10 +116,14 @@ export default {
   data() {
     return {
       table_name: "onl_table",
+      /* 排序参数 */
+      isorter: {
+        column: "create_time",
+        order: "DESC",
+      },
       config: {
         setting_button: true,
       },
-
       url: {
         list: "/onl/onl_table",
         edit: "/onl/onl_table",

@@ -2,7 +2,7 @@
 import axios from "axios";
 const qs = require('qs');
 axios.defaults.timeout = 60000; // 请求超时
-axios.defaults.baseURL = "/sap"; // 增加请求默认路径前缀
+axios.defaults.baseURL = "/api"; // 增加请求默认路径前缀
 
 const headersjson = {
     "Content-Type": "application/json; charset=utf-8"

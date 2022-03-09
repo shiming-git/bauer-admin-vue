@@ -39,14 +39,20 @@
       filter-multiple 数据过滤的选项是否多选
       filter-method 数据过滤使用的方法，如果是多选的筛选项
       filtered-value 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性
+
+      column 自定义显示格式
    -->
       <el-table-column
         type="selection"
         width="50"
         v-if="isSelection"
       ></el-table-column>
-      <el-table-column type="index" width="50" label="序号" v-if="isNumber">
-      </el-table-column>
+      <el-table-column
+        type="index"
+        width="50"
+        label="序号"
+        v-if="isNumber"
+      ></el-table-column>
       <el-table-column
         v-for="(item, index) in tableColumn"
         :key="item[rowKey]"
@@ -68,13 +74,19 @@
               :index="index"
             ></slot>
           </div>
+          <div v-else-if="item.column">{{ item.column(scope.row, item) }}</div>
           <div v-else>{{ scope.row[item.prop] }}</div>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-row type="flex" class="row-bg" justify="end">
-      <el-col :span="11">
+    <el-row
+      type="flex"
+      class="row-bg"
+      justify="end"
+      style="margin-top: 10px; margin-right: 10px"
+    >
+      <el-col>
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -83,6 +95,7 @@
           :page-size="page.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="page.total"
+          style="text-align: right"
         >
         </el-pagination>
       </el-col>
