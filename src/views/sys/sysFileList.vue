@@ -92,7 +92,7 @@ export default {
           label: "图片",
           prop: "img",
           sortable: true,
-          width: "120",
+          width: "200",
           slotVlue: "imgSlot",
         },
       ],

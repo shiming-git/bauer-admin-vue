@@ -86,8 +86,10 @@ export default {
       config: {
         setting_button: true,
       },
-
-      tableData: [],
+      isorter: {
+        column: "dataTime",
+        order: "DESC",
+      },
       url: {
         list: "/sys/role",
         edit: "/sys/role",
