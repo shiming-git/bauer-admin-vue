@@ -66,6 +66,7 @@
         :fixed="item.fixed || false"
       >
         <template slot-scope="scope">
+          <!-- 判断模块 -->
           <div v-if="item.slotVlue">
             <slot
               :name="item.slotVlue"
@@ -74,8 +75,10 @@
               :index="index"
             ></slot>
           </div>
+          <!-- 判断自定义函数 -->
           <div v-else-if="item.column">{{ item.column(scope.row, item) }}</div>
-          <div v-else>{{ scope.row[item.prop] }}</div>
+          <!-- 默认显示 -->
+          <div v-else>{{ showContents(item.prop, scope.row) }}</div>
         </template>
       </el-table-column>
     </el-table>
@@ -252,6 +255,10 @@ export default {
       this.page = {};
       this.page = Object.assign({}, val);
       this.$forceUpdate();
+    },
+
+    showContents(key, row) {
+      return row[key + "_describe"] || row[key];
     },
   },
 };

@@ -76,6 +76,10 @@ export default {
       config: {
         setting_button: true,
       },
+      isorter: {
+        column: "create_time",
+        order: "DESC",
+      },
       defineAttributes: {
         oper_button: {
           width: "180px",

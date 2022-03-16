@@ -106,11 +106,12 @@
         align="center"
       >
         <template scope="scope">
-          <el-input
-            size="small"
+          <x-select
             v-model="scope.row.control_type"
             placeholder="控件类型"
-          ></el-input>
+            dict="onl_table_control_type"
+            size="small"
+          />
         </template>
       </el-table-column>
 

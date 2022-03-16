@@ -47,7 +47,7 @@
             <x-select
               v-model="model.table_type"
               placeholder="请选择表类型"
-              dict="dictString"
+              dict="onl_table_type"
             />
           </el-form-item>
         </el-col>
@@ -75,22 +75,21 @@
             <x-select
               v-model="model.table_class"
               placeholder="请输入表分类"
-              dict="dictString"
+              dict="onl_table_class"
             />
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item
             label="弹窗满屏"
-            prop="dialog_is_whole"
+            prop="dialog_full"
             :label-width="labelWidth"
           >
-            <el-input
-              v-model="model.dialog_is_whole"
-              show-word-limit
-              maxlength="10"
+            <x-select
+              v-model="model.dialog_full"
               placeholder="请输入弹窗满屏"
-            ></el-input>
+              dict="onl_table_full_screen"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -99,7 +98,7 @@
             prop="table_paging"
             :label-width="labelWidth"
           >
-            <x-radio v-model="model.table_paging" dict="dictString"></x-radio>
+            <x-radio v-model="model.table_paging" dict="onl_table_is_tree"></x-radio>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -108,7 +107,7 @@
             prop="table_tree"
             :label-width="labelWidth"
           >
-            <x-radio v-model="model.table_tree" dict="dictString"></x-radio>
+            <x-radio v-model="model.table_tree" dict="onl_table_is_tree"></x-radio>
           </el-form-item>
         </el-col>
       </el-row>
@@ -232,7 +231,7 @@ export default {
         dialog_width: 900,
         table_paging: "Y",
         table_tree: "N",
-        dialog_is_whole: "N",
+        dialog_full: "N",
       },
       fieldList: [],
       url: {

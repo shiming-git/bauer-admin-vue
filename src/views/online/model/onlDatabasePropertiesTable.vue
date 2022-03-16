@@ -74,11 +74,12 @@
         align="center"
       >
         <template scope="scope">
-          <el-input
-            size="small"
+          <x-select
             v-model="scope.row.field_type"
             placeholder="字段类型"
-          ></el-input>
+            dict="onl_table_field_type"
+            size="small"
+          />
         </template>
       </el-table-column>
       <el-table-column
@@ -143,7 +144,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: "onlDatabasePropertiesTable",
   props: {

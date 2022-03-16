@@ -8,7 +8,7 @@
       <span>
         <el-page-header
           @back="goBack"
-          :content="rowObj.table + '(' + rowObj.code + ')'"
+          :content="rowObj.table"
           style="margin: 10px"
         ></el-page-header>
         <el-table :data="tableData" style="width: 100%" border size="small">
@@ -119,16 +119,18 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       }).then(() => {
-        http.delete(this.url.field, { ids: row.id }).then((res) => {
-          if (res.code !== "00000") {
-            return this.$message.error(res.message);
-          }
-          this.$message({
-            type: "success",
-            message: "删除成功!",
+        http
+          .delete(this.url.field, { ids: row.id, dict_code: row.dict_code })
+          .then((res) => {
+            if (res.code !== "00000") {
+              return this.$message.error(res.message);
+            }
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+            that.getFieldList();
           });
-          that.getFieldList();
-        });
       });
     },
 
